@@ -1,6 +1,7 @@
 # 🚀 Groww Goal-Calibrated SIP Prototype
 
 [![Groww Design Language](https://img.shields.io/badge/Design_Language-Groww_Emerald_%2300D09C-00D09C?style=for-the-badge)](https://groww.in)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmodignani95-wq%2Fgroww-calibrated-sip-prototype)
 [![Device Mockup](https://img.shields.io/badge/Device_Mockup-iPhone_16_Pro_%7C_Pixel_9-blue?style=for-the-badge)](http://localhost:3000)
 [![Fintech Product Design](https://img.shields.io/badge/Role-Growth_PM_%7C_Product_Designer-purple?style=for-the-badge)](https://github.com/modignani95-wq)
 
@@ -106,3 +107,4 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 - **Background:** Crisp White (`#FFFFFF`) with generous whitespace
 - **Typography:** Inter & JetBrains Mono with deep charcoal (`#1E222B`)
 - **Chassis:** Hyper-realistic iPhone 16 Pro with Dynamic Island, physical side buttons, and iOS home indicator.
+
