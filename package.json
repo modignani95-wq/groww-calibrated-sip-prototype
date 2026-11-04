@@ -5,8 +5,9 @@
   "main": "src/main.js",
   "type": "module",
   "scripts": {
-    "start": "python -m http.server 3000",
-    "serve": "npx serve ."
+    "build": "echo 'Static build ready'",
+    "start": "npx serve .",
+    "dev": "python -m http.server 3000"
   },
   "keywords": [
     "groww",
@@ -15,9 +16,9 @@
     "sip",
     "prototype",
     "behavioral-economics",
-    "enach"
+    "enach",
+    "vercel"
   ],
   "author": "Growth Product Manager, Groww",
   "license": "MIT"
 }
-
