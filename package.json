@@ -5,7 +5,6 @@
   "main": "src/main.js",
   "type": "module",
   "scripts": {
-    "build": "echo 'Static build ready'",
     "start": "npx serve .",
     "dev": "python -m http.server 3000"
   },
