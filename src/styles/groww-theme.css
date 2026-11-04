@@ -1,0 +1,86 @@
+/* Groww Design Tokens - Authentic Light Mode with Dark Mode Support */
+
+:root {
+  /* Groww Signature Brand Palette */
+  --groww-primary: #00D09C;
+  --groww-primary-dark: #00B386;
+  --groww-primary-light: #E6FAF5;
+  --groww-primary-glow: rgba(0, 208, 156, 0.35);
+  
+  --groww-blue: #5367FF;
+  --groww-amber: #D97706;
+  --groww-amber-light: #FEF3C7;
+  --groww-red: #EB5B5B;
+
+  /* REAL GROWW LIGHT MODE (DEFAULT) - Crisp White & Airy */
+  --bg-canvas: #F0F3F7;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-subtle: #F8FAFC;
+  --bg-card-mint: #F2FCF8;
+  --bg-input: #F1F4F7;
+  --border-subtle: #ECEFF2;
+  --border-card: #E5E9EE;
+  --border-active: #00D09C;
+  --text-main: #1E222B;
+  --text-secondary: #44475B;
+  --text-muted: #7C7E8C;
+  --text-subtle: #9EA3B0;
+  --status-bar-text: #1E222B;
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  --shadow-float: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+  --shadow-sheet: 0 -10px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Dark Mode Overrides (Optional Toggle) */
+.theme-dark {
+  --bg-canvas: #080B12;
+  --bg-surface: #121623;
+  --bg-card: #1C2232;
+  --bg-card-subtle: #171D2D;
+  --bg-card-mint: #162428;
+  --bg-input: #0F131D;
+  --border-subtle: #242B3D;
+  --border-card: #2B3347;
+  --border-active: #00D09C;
+  --text-main: #FFFFFF;
+  --text-secondary: #E2E8F0;
+  --text-muted: #8E95A5;
+  --text-subtle: #5F6677;
+  --status-bar-text: #FFFFFF;
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-float: 0 20px 45px -10px rgba(0, 0, 0, 0.5);
+  --shadow-sheet: 0 -12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Surface Utility Classes */
+.theme-surface {
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+}
+.theme-card {
+  background-color: var(--bg-card);
+  border-color: var(--border-card);
+  color: var(--text-main);
+  box-shadow: var(--shadow-card);
+}
+.theme-card-subtle {
+  background-color: var(--bg-card-subtle);
+  border-color: var(--border-subtle);
+}
+.theme-card-mint {
+  background-color: var(--bg-card-mint);
+  border-color: rgba(0, 208, 156, 0.3);
+}
+.theme-border {
+  border-color: var(--border-subtle);
+}
+.theme-text-main {
+  color: var(--text-main);
+}
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+.theme-text-muted {
+  color: var(--text-muted);
+}

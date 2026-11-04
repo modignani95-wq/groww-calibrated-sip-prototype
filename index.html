@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groww - Calibrated SIP Prototype | Mobile Mockup Studio</title>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Modular Styles -->
+  <link rel="stylesheet" href="./src/styles/main.css">
+</head>
+<body class="bg-[#EEF2F6] text-slate-900 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white overflow-x-hidden">
+
+  <!-- ======================================================== -->
+  <!-- STUDIO TOP NAVIGATION BAR & DEVICE CONTROLS             -->
+  <!-- ======================================================== -->
+  <header class="w-full bg-white/95 border-b border-slate-200/90 backdrop-blur-md sticky top-0 z-50 px-4 py-2.5 shadow-xs">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Project Info -->
+      <div class="flex items-center space-x-3">
+        <!-- Groww Brand Logo Icon -->
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#00D09C] via-[#00B386] to-[#5367FF] p-0.5 shadow-sm flex items-center justify-center">
+          <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center">
+            <span class="text-[#00D09C] font-extrabold text-lg leading-none">G</span>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-slate-900 font-bold tracking-tight text-sm">Groww</span>
+            <span class="text-[10px] font-mono uppercase bg-emerald-50 text-[#008765] px-2 py-0.5 rounded-full border border-emerald-200 font-bold">Goal SIP</span>
+          </div>
+          <p class="text-[11px] text-slate-500 hidden sm:block">Calibrated SIP Onboarding Mockup</p>
+        </div>
+      </div>
+
+      <!-- Center: Device Mockup Switcher & Scale Controls -->
+      <div class="flex items-center space-x-2 bg-slate-100/90 p-1 rounded-xl border border-slate-200">
+        <!-- Device Frame Selector -->
+        <div class="flex items-center space-x-1">
+          <button data-device-type="iphone" class="active-device-btn px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 hover:text-slate-900 transition-all flex items-center space-x-1">
+            <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+            <span>iPhone 16 Pro</span>
+          </button>
+          <button data-device-type="pixel" class="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition-all flex items-center space-x-1">
+            <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+            <span>Pixel 9</span>
+          </button>
+          <button data-device-type="frameless" class="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition-all hidden md:flex items-center space-x-1">
+            <i data-lucide="tablet" class="w-3.5 h-3.5"></i>
+            <span>Frameless</span>
+          </button>
+        </div>
+
+        <div class="h-4 w-px bg-slate-300 hidden md:block"></div>
+
+        <!-- Zoom Scale -->
+        <div class="hidden sm:flex items-center space-x-1">
+          <button data-zoom-scale="1.0" class="active-zoom-btn px-2 py-0.5 rounded text-[11px] text-slate-800 hover:text-slate-950 font-mono">100%</button>
+          <button data-zoom-scale="0.9" class="px-2 py-0.5 rounded text-[11px] text-slate-500 hover:text-slate-900 font-mono">90%</button>
+          <button data-zoom-scale="0.8" class="px-2 py-0.5 rounded text-[11px] text-slate-500 hover:text-slate-900 font-mono">80%</button>
+        </div>
+      </div>
+
+      <!-- Right: Step Progress & PM Drawer Action -->
+      <div class="flex items-center space-x-2.5">
+        <!-- Step Flow Navigation Pills -->
+        <div class="hidden xl:flex items-center space-x-1 bg-slate-100 p-1 rounded-full border border-slate-200 text-xs">
+          <button data-step="1" class="step-flow-pill px-3 py-1 rounded-full font-bold bg-[#00D09C]/15 text-[#008765] border border-[#00D09C]/30">1. Fund</button>
+          <span class="text-slate-400">→</span>
+          <button data-step="2" class="step-flow-pill px-3 py-1 rounded-full font-medium text-slate-600 hover:text-slate-900">2. Goal Selection</button>
+          <span class="text-slate-400">→</span>
+          <button data-step="4" class="step-flow-pill px-3 py-1 rounded-full font-medium text-slate-600 hover:text-slate-900">3. Details & Mandate</button>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="btn-toggle-theme" title="Toggle Light/Dark Theme" class="p-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl transition-all">
+          <i id="theme-icon" data-lucide="moon" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Sound Toggle -->
+        <button id="btn-toggle-sound" title="Toggle Haptic Sound" class="p-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl transition-all">
+          <i data-lucide="volume-2" class="w-4 h-4"></i>
+        </button>
+
+        <!-- PM Thesis Drawer Button -->
+        <button id="btn-toggle-pm-specs" class="flex items-center space-x-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-[#008765] px-3 py-2 rounded-xl text-xs font-bold transition-all shadow-xs">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#00A87D]"></i>
+          <span>Design Specs</span>
+        </button>
+
+        <!-- Reset Button -->
+        <button id="btn-restart-app" title="Reset Prototype" class="p-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl transition-all">
+          <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN STAGE: AUTHENTIC MOBILE MOCKUP CONTAINER            -->
+  <!-- ======================================================== -->
+  <main class="flex-1 w-full flex items-center justify-center p-3 sm:p-6 lg:p-8 overflow-y-auto">
+    
+    <div id="device-stage" class="device-stage">
+      
+      <!-- ==================================================== -->
+      <!-- HYPER-REALISTIC PHONE CHASSIS (IPHONE / PIXEL)       -->
+      <!-- ==================================================== -->
+      <div id="device-chassis" class="device-chassis iphone">
+        
+        <!-- Hardware Volume Buttons (for iPhone mockup) -->
+        <div class="hardware-volume">
+          <div class="hardware-volume-up"></div>
+          <div class="hardware-volume-down"></div>
+        </div>
+
+        <!-- Phone Inner Screen (Pure White Groww Mobile App) -->
+        <div id="phone-screen" class="inner-screen theme-surface bg-white text-slate-900">
+          
+          <!-- Glossy Glass Glare Overlay -->
+          <div class="screen-glare"></div>
+
+          <!-- Dynamic Island (Interactive iOS pill) -->
+          <div id="dynamic-island" class="dynamic-island" title="Tap to test Dynamic Island">
+            <div class="camera-lens"></div>
+            <div class="sensor-pill"></div>
+          </div>
+
+          <!-- Pixel Punchhole (shown when Pixel mode selected) -->
+          <div class="pixel-punchhole"></div>
+
+          <!-- ================================================ -->
+          <!-- AUTHENTIC MOBILE STATUS BAR                      -->
+          <!-- ================================================ -->
+          <div class="w-full pt-3 pb-2 px-6 flex items-center justify-between text-[11px] font-semibold z-40 select-none text-slate-800">
+            <!-- Left: Live Clock -->
+            <span id="live-clock" class="tracking-tight font-semibold">09:41</span>
+            
+            <!-- Right: System Icons -->
+            <div class="flex items-center space-x-2 text-slate-800">
+              <i data-lucide="signal" class="w-3.5 h-3.5"></i>
+              <span class="text-[9px] font-mono font-bold">5G</span>
+              <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+              <div class="w-5 h-2.5 border border-slate-800 rounded-xs p-0.5 flex items-center">
+                <div class="h-full w-full bg-[#00D09C] rounded-2xs"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================ -->
+          <!-- SCROLLABLE SCREEN APP SURFACE (AIRY & CLEAN)     -->
+          <!-- ================================================ -->
+          <div id="phone-scroll-surface" class="relative flex-1 overflow-y-auto no-scrollbar pb-24 bg-white">
+            
+            <!-- ---------------------------------------------- -->
+            <!-- SCREEN 1: FUND DETAILS & "START SIP" TAP       -->
+            <!-- ---------------------------------------------- -->
+            <section id="screen-1" class="screen-panel active p-5 space-y-5">
+              
+              <!-- Groww Mobile Navigation Bar -->
+              <div class="flex items-center justify-between pb-1">
+                <button class="p-2 -ml-2 text-slate-700 hover:text-slate-950 rounded-full">
+                  <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </button>
+                <div class="flex items-center space-x-1">
+                  <button class="p-2 text-slate-700 hover:text-slate-950 rounded-full">
+                    <i data-lucide="bookmark" class="w-4 h-4"></i>
+                  </button>
+                  <button class="p-2 text-slate-700 hover:text-slate-950 rounded-full">
+                    <i data-lucide="share-2" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Fund Identity Header (Generous whitespace) -->
+              <div class="space-y-3 pt-1">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center space-x-3.5">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-center justify-center p-2 shrink-0 shadow-xs">
+                      <span class="text-amber-700 font-extrabold text-base tracking-tight">PP</span>
+                    </div>
+                    <div>
+                      <h1 class="text-base font-bold text-slate-900 leading-tight">Parag Parikh Flexi Cap Fund</h1>
+                      <div class="flex items-center space-x-2 mt-1.5">
+                        <span class="text-[10px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-md font-medium">Direct · Growth</span>
+                        <span class="text-[10px] bg-emerald-50 text-[#008765] px-2.5 py-0.5 rounded-md font-bold border border-emerald-200">5★ CRISIL</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Live NAV -->
+                <div class="pt-2 flex items-baseline space-x-3">
+                  <span class="text-3xl font-extrabold tracking-tight text-slate-900">₹84.62</span>
+                  <span class="text-xs font-bold text-[#008765] flex items-center">
+                    <i data-lucide="trending-up" class="w-3.5 h-3.5 mr-0.5 inline"></i>
+                    +₹1.18 (1.41%) <span class="text-[10px] text-slate-500 font-normal ml-1">1D</span>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Interactive Returns Chart Card (White & Spacious) -->
+              <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-xs space-y-4">
+                <div class="flex items-center justify-between text-xs">
+                  <div class="flex items-center space-x-1.5">
+                    <span class="text-slate-500 font-medium">Annualised Returns:</span>
+                    <span id="chart-return-badge" class="font-extrabold text-[#008765] text-sm">+24.8% p.a.</span>
+                  </div>
+                  <span class="text-[11px] text-slate-400 font-mono">Nifty 500 TRI</span>
+                </div>
+
+                <!-- Canvas Chart -->
+                <div class="relative w-full h-32 flex items-center justify-center">
+                  <canvas id="returns-chart" class="w-full h-full"></canvas>
+                  <div id="chart-tooltip" class="absolute pointer-events-none hidden bg-slate-900 text-white text-[10px] px-2 py-1 rounded shadow-lg font-mono">
+                    ₹74,210 (+24.8%)
+                  </div>
+                </div>
+
+                <!-- Timeframe Tabs Container -->
+                <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                  <button class="chart-tab-btn text-xs font-semibold px-3 py-1 rounded-lg text-slate-500 hover:text-slate-900 transition-all" data-period="1Y">1Y</button>
+                  <button class="chart-tab-btn active-tab text-xs font-bold px-3 py-1 rounded-lg transition-all" data-period="3Y">3Y</button>
+                  <button class="chart-tab-btn text-xs font-semibold px-3 py-1 rounded-lg text-slate-500 hover:text-slate-900 transition-all" data-period="5Y">5Y</button>
+                  <button class="chart-tab-btn text-xs font-semibold px-3 py-1 rounded-lg text-slate-500 hover:text-slate-900 transition-all" data-period="ALL">All</button>
+                </div>
+              </div>
+
+              <!-- Fund Metrics Grid (Airy & Clean) -->
+              <div class="grid grid-cols-3 gap-2.5 text-center">
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3">
+                  <div class="text-[10px] text-slate-500">Min SIP Amount</div>
+                  <div class="text-xs font-bold text-slate-900 mt-1">₹1,000</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3">
+                  <div class="text-[10px] text-slate-500">Fund Size (AUM)</div>
+                  <div class="text-xs font-bold text-slate-900 mt-1">₹68,450 Cr</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3">
+                  <div class="text-[10px] text-slate-500">Expense Ratio</div>
+                  <div class="text-xs font-bold text-slate-900 mt-1">0.62%</div>
+                </div>
+              </div>
+
+              <!-- Risk Profile Notice -->
+              <div class="flex items-center space-x-3 bg-amber-50/80 border border-amber-200/90 rounded-xl p-3.5 text-xs">
+                <div class="w-7 h-7 rounded-full bg-amber-100 flex items-center justify-center shrink-0 text-amber-700">
+                  <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                </div>
+                <div class="text-[11px] leading-snug text-slate-700">
+                  <span class="font-bold text-amber-800">Very High Risk:</span> Equity holdings are subject to cyclical drawdowns.
+                </div>
+              </div>
+
+              <!-- Spacer for fixed CTA -->
+              <div class="h-10"></div>
+            </section>
+
+            <!-- ---------------------------------------------- -->
+            <!-- SCREEN 4: CALIBRATED SIP DETAILS & MANDATE     -->
+            <!-- ---------------------------------------------- -->
+            <section id="screen-4" class="screen-panel p-5 space-y-5 bg-white">
+              
+              <!-- Screen 4 Header -->
+              <div class="flex items-center space-x-3 pb-2 border-b border-slate-100">
+                <button id="btn-back-to-sheet" class="p-1.5 -ml-1 text-slate-600 hover:text-slate-950 rounded-full">
+                  <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </button>
+                <div>
+                  <h2 class="text-base font-bold text-slate-900">Confirm SIP</h2>
+                  <p class="text-[11px] text-slate-500">Review your monthly investment & bank mandate</p>
+                </div>
+              </div>
+
+              <!-- Goal Linked Milestone Card -->
+              <div class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-4 flex items-center justify-between shadow-xs">
+                <div class="flex items-center space-x-3.5">
+                  <div id="enach-milestone-icon" class="w-11 h-11 rounded-xl bg-emerald-100 text-[#008765] flex items-center justify-center text-xl shadow-xs shrink-0">
+                    ✈️
+                  </div>
+                  <div>
+                    <div class="text-xs font-bold text-slate-900 flex items-center space-x-1.5">
+                      <span id="enach-milestone-title">Travel & Lifestyle</span>
+                      <span class="text-[9px] bg-emerald-100 text-[#008765] px-1.5 rounded font-bold">Goal Linked</span>
+                    </div>
+                    <p id="enach-milestone-subtitle" class="text-[11px] text-slate-600 mt-0.5">Travel & Lifestyle · 2–5 Yrs Horizon</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono tracking-wider">Est. Corpus</span>
+                  <div id="enach-target-corpus-val" class="text-xs font-extrabold text-[#008765]">₹1.82 Lakh</div>
+                </div>
+              </div>
+
+              <!-- AI Calibrated Allocation Breakdown Card -->
+              <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3.5 shadow-xs">
+                <div class="flex items-center justify-between text-xs text-slate-500">
+                  <div class="flex items-center space-x-1.5">
+                    <span class="w-2 h-2 rounded-full bg-[#00D09C]"></span>
+                    <span class="font-bold text-slate-800">Calibrated Monthly SIP</span>
+                  </div>
+                  <span class="text-[10px] bg-slate-100 px-2 py-0.5 rounded text-slate-600 font-medium">5th of every month</span>
+                </div>
+
+                <div class="flex items-baseline space-x-2">
+                  <span id="enach-sip-amount" class="text-3xl font-extrabold text-slate-900 tracking-tight">₹4,000</span>
+                  <span class="text-xs text-slate-500 font-medium">/ month</span>
+                </div>
+
+                <!-- Dynamic Allocation Breakdown -->
+                <div class="pt-3 border-t border-slate-100 space-y-2 text-xs">
+                  <div class="flex items-center justify-between">
+                    <span class="text-slate-600 flex items-center space-x-2">
+                      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                      <span>Parag Parikh Flexi Cap Fund</span>
+                    </span>
+                    <span id="enach-equity-part" class="font-bold text-slate-900">₹3,200 (80%)</span>
+                  </div>
+                  <div id="enach-buffer-row" class="flex items-center justify-between">
+                    <span class="text-slate-600 flex items-center space-x-2">
+                      <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                      <span>Groww Instant Liquid Buffer</span>
+                    </span>
+                    <span id="enach-buffer-part" class="font-bold text-amber-700">₹800 (20%)</span>
+                  </div>
+                </div>
+
+                <!-- Secondary Crisis Buffer Toggle inside Details -->
+                <div class="pt-3 border-t border-slate-100">
+                  <label class="flex items-start space-x-2.5 cursor-pointer bg-slate-50 p-3 rounded-xl border border-slate-200/80">
+                    <input id="details-buffer-toggle" type="checkbox" checked class="mt-0.5 accent-[#00D09C] w-4 h-4 rounded cursor-pointer">
+                    <div class="flex-1 text-[11px] leading-snug">
+                      <span class="font-bold text-slate-900">Auto-allocate 20% (<span id="details-buffer-amount-text" class="text-[#008765]">₹800/mo</span>) into Liquid Buffer</span>
+                      <p class="text-[10px] text-slate-500 mt-0.5">
+                        Provides instant cash access during emergencies without breaking your compounding equity units.
+                      </p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Bank Mandate e-NACH Details -->
+              <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3.5 shadow-xs">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-500">Primary Bank Account</span>
+                  <span class="text-[#008765] flex items-center space-x-1 text-[11px] font-bold">
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                    <span>Pre-Verified</span>
+                  </span>
+                </div>
+
+                <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                  <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 font-extrabold flex items-center justify-center text-xs">
+                    HDFC
+                  </div>
+                  <div class="flex-1">
+                    <div class="text-xs font-bold text-slate-900">HDFC Bank Ltd</div>
+                    <div class="text-[11px] text-slate-500 font-mono">A/c No: •••• •••• 4892</div>
+                  </div>
+                  <span class="text-[10px] bg-white border border-slate-200 text-slate-600 px-2 py-0.5 rounded font-mono font-medium">e-NACH</span>
+                </div>
+
+                <div class="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                  <span>Mandate Limit</span>
+                  <span class="font-mono text-slate-800 font-semibold">₹25,000 max / debit</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-slate-500">
+                  <span>NPCI Processing Fee</span>
+                  <span class="text-[#008765] font-bold">₹0 (Zero Fee)</span>
+                </div>
+              </div>
+
+              <div class="h-10"></div>
+            </section>
+
+            <!-- ---------------------------------------------- -->
+            <!-- SCREEN 5: MANDATE SUCCESS SCREEN               -->
+            <!-- (Only shown after user confirms SIP & mandate) -->
+            <!-- ---------------------------------------------- -->
+            <section id="screen-5" class="screen-panel flex-panel flex-col justify-center items-center h-full p-6 text-center space-y-6 bg-white">
+              
+              <div class="relative pt-6">
+                <div class="w-20 h-20 rounded-full bg-emerald-50 border-2 border-[#00D09C] flex items-center justify-center text-[#00A87D] shadow-md animate-bounce">
+                  <i data-lucide="check" class="w-10 h-10 stroke-[3]"></i>
+                </div>
+                <div class="absolute top-5 right-0 w-6 h-6 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-xs font-bold">
+                  🛡️
+                </div>
+              </div>
+
+              <div class="space-y-1.5">
+                <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">SIP Linked to Goal!</h2>
+                <p class="text-xs text-slate-500">e-NACH Mandate Registered Successfully</p>
+                <div class="text-[11px] font-mono text-[#008765] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 inline-block mt-2 font-bold">
+                  URN: UMRN-GWW-2029-48921
+                </div>
+              </div>
+
+              <!-- Milestone Confirmation Card -->
+              <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left space-y-3 shadow-xs">
+                <div class="flex items-center justify-between border-b border-slate-200/80 pb-2">
+                  <span class="text-xs text-slate-500">Linked Milestone</span>
+                  <span id="success-milestone-text" class="text-xs font-bold text-slate-900">✈️ Travel & Lifestyle</span>
+                </div>
+                <div class="flex items-center justify-between border-b border-slate-200/80 pb-2">
+                  <span class="text-xs text-slate-500">1st Auto-Debit Date</span>
+                  <span class="text-xs font-bold text-[#008765]">5th December, 2026</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs text-slate-500">Expected Corpus</span>
+                  <span id="success-corpus-text" class="text-xs font-bold text-[#008765]">₹1,82,400 (2–5 Yrs)</span>
+                </div>
+              </div>
+
+              <div id="success-investors-note" class="bg-emerald-50/50 p-3.5 rounded-xl border border-emerald-100 text-[11px] text-slate-600 leading-snug">
+                🎉 Goal successfully anchored. Investors who stay invested through market dips achieve their target milestone with high consistency.
+              </div>
+
+              <button id="btn-done-success" class="w-full groww-primary-btn font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider">
+                Explore Portfolio & Goals
+              </button>
+            </section>
+
+          </div>
+
+          <!-- ================================================ -->
+          <!-- FIXED BOTTOM FOOTERS (LIGHT & CRISP)             -->
+          <!-- ================================================ -->
+          
+          <!-- Screen 1 Footer: [Start SIP] -->
+          <div id="screen-1-footer" class="absolute bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30">
+            <div class="flex items-center space-x-3">
+              <button class="w-1/3 py-3.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition-colors">
+                One-Time
+              </button>
+              <button id="btn-start-sip" class="w-2/3 py-3.5 rounded-xl groww-primary-btn text-xs font-extrabold uppercase tracking-wider flex items-center justify-center space-x-2">
+                <span>Start SIP</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Screen 4 Footer: [Confirm & Start SIP] -->
+          <div id="screen-4-footer" class="absolute bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30 hidden">
+            <button id="btn-confirm-enach" class="w-full py-3.5 rounded-xl groww-primary-btn text-xs font-extrabold uppercase tracking-wider flex items-center justify-center space-x-2">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              <span>Confirm & Start SIP</span>
+            </button>
+          </div>
+
+          <!-- ================================================ -->
+          <!-- SCREEN 2: CLEAN GOAL BOTTOM SHEET                -->
+          <!-- (No jargon, horizontal cards, clean CTA)         -->
+          <!-- ================================================ -->
+          <div id="sheet-backdrop" class="bottom-sheet-backdrop"></div>
+
+          <div id="goal-bottom-sheet" class="bottom-sheet bg-white border-t border-slate-200 flex flex-col shadow-2xl">
+            
+            <!-- Drag Handle -->
+            <div class="w-full flex justify-center pt-3 pb-1">
+              <div class="w-10 h-1 bg-slate-300 rounded-full"></div>
+            </div>
+
+            <div class="p-5 overflow-y-auto no-scrollbar space-y-4 bg-white">
+              
+              <!-- Clean Sheet Header (No internal jargon, no subheading) -->
+              <div class="flex items-center justify-between pb-1">
+                <h3 class="text-base font-bold text-slate-900 tracking-tight">What milestone are you investing for?</h3>
+                <button id="btn-close-sheet" class="p-1 text-slate-400 hover:text-slate-800 rounded-full">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <!-- ============================================== -->
+              <!-- HORIZONTAL GOAL CARDS                          -->
+              <!-- ============================================== -->
+              <div class="grid grid-cols-3 gap-2.5">
+                
+                <!-- Card 1: Emergency Fund -->
+                <div class="goal-card" data-horizon="short">
+                  <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 text-lg flex items-center justify-center mb-1.5 shrink-0">
+                    🛡️
+                  </div>
+                  <div class="text-xs font-bold text-slate-900 leading-tight">Emergency Fund</div>
+                  <div class="text-[10px] text-slate-500 font-medium mt-1">1 – 2 Yrs</div>
+                </div>
+
+                <!-- Card 2: Travel & Lifestyle (Default / Recommended) -->
+                <div class="goal-card active" data-horizon="mid">
+                  <span class="absolute -top-2 bg-[#00D09C] text-slate-950 text-[8px] font-extrabold uppercase px-1.5 py-0.2 rounded-full tracking-wider shadow-xs">Top Pick</span>
+                  <div class="w-9 h-9 rounded-xl bg-emerald-100 text-[#008765] text-lg flex items-center justify-center mb-1.5 shrink-0">
+                    ✈️
+                  </div>
+                  <div class="text-xs font-bold text-slate-900 leading-tight">Travel & Lifestyle</div>
+                  <div class="text-[10px] text-slate-600 font-semibold mt-1">2 – 5 Yrs</div>
+                </div>
+
+                <!-- Card 3: Wealth & Home -->
+                <div class="goal-card" data-horizon="long">
+                  <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 text-lg flex items-center justify-center mb-1.5 shrink-0">
+                    🏡
+                  </div>
+                  <div class="text-xs font-bold text-slate-900 leading-tight">Wealth & Home</div>
+                  <div class="text-[10px] text-slate-500 font-medium mt-1">5+ Yrs</div>
+                </div>
+
+              </div>
+
+              <!-- ============================================== -->
+              <!-- GROWW INVESTOR INSIGHT (NO TECH JARGON)        -->
+              <!-- ============================================== -->
+              <div id="rag-cohort-card" class="bg-[#F2FCF8] rounded-2xl p-4 border border-[#00D09C]/40 space-y-3.5 shadow-xs relative overflow-hidden">
+                
+                <div class="flex items-center space-x-1.5 text-xs font-bold text-[#008765]">
+                  <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#00A87D]"></i>
+                  <span>Groww Investor Insight</span>
+                </div>
+
+                <!-- Dynamic Clean Copy -->
+                <p id="rag-cohort-copy" class="text-xs font-medium text-slate-800 leading-relaxed">
+                  <span class="font-bold text-[#008765]">42,000 Groww investors</span> with a 3-Year goal achieved a <span class="font-bold text-[#008765]">24.6% 3Y rolling CAGR</span> by staying consistent—even through 12-month market dips.
+                </p>
+
+                <!-- Subtle 12-Month Dip Recovery Bar -->
+                <div class="bg-white rounded-xl p-2.5 border border-emerald-100 text-[10px] space-y-1 shadow-xs">
+                  <div class="flex justify-between text-slate-500 font-mono">
+                    <span id="rag-dip-stat">Month 10–12 Dip: -8.4%</span>
+                    <span id="rag-maturity-stat" class="text-[#008765] font-bold">Month 36: +24.6% CAGR</span>
+                  </div>
+                  <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden flex">
+                    <div id="rag-dip-bar" class="bg-red-400 w-[35%]" title="Market Dip Phase"></div>
+                    <div id="rag-recovery-bar" class="bg-[#00D09C] w-[65%]" title="Compound Recovery"></div>
+                  </div>
+                  <p id="rag-survival-note" class="text-[9px] text-slate-500 italic">
+                    94.2% of investors who did not panic-cancel during the 12-month dip exited with strong gains.
+                  </p>
+                </div>
+
+                <!-- Monthly Commitment Slider -->
+                <div class="space-y-2 pt-1 border-t border-emerald-200/60">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <span class="text-xs font-bold text-slate-900">Monthly Investment</span>
+                      <p class="text-[10px] text-slate-500">Choose monthly SIP amount</p>
+                    </div>
+                    <div class="text-right">
+                      <span id="slider-sip-display" class="text-base font-extrabold text-[#008765] font-mono">₹4,000</span>
+                      <span class="text-[10px] text-slate-500">/mo</span>
+                    </div>
+                  </div>
+
+                  <!-- Slider Control -->
+                  <input id="commitment-slider" type="range" min="1000" max="20000" step="500" value="4000" class="groww-slider">
+                  
+                  <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                    <span>₹1,000</span>
+                    <span id="projected-corpus-badge" class="text-slate-700 font-bold">Est. Corpus: ₹1.82 Lakh in 2–5 Yrs</span>
+                    <span>₹20,000</span>
+                  </div>
+                </div>
+
+                <!-- Clean Continue CTA Button -->
+                <button id="btn-accept-rag-continue" class="w-full py-3.5 groww-primary-btn font-extrabold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center space-x-2">
+                  <span>Continue</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ================================================ -->
+          <!-- NPCI E-MANDATE SIMULATOR MODAL                   -->
+          <!-- ================================================ -->
+          <div id="npci-modal" class="absolute inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex flex-col justify-end">
+            <div class="bg-white rounded-t-3xl border-t border-slate-200 p-5 space-y-4 shadow-2xl">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center space-x-2">
+                  <div class="w-6 h-6 rounded bg-emerald-50 text-[#008765] flex items-center justify-center text-xs font-bold font-mono border border-emerald-200">
+                    NPCI
+                  </div>
+                  <span class="text-xs font-bold text-slate-900">e-Mandate Authentication</span>
+                </div>
+                <button id="btn-close-npci" class="text-slate-400 hover:text-slate-700">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between text-slate-500">
+                  <span>Mandate Holder:</span>
+                  <span class="text-slate-900 font-bold">Aakash Sharma</span>
+                </div>
+                <div class="flex justify-between text-slate-500">
+                  <span>Autodebit Amount:</span>
+                  <span id="npci-modal-debit-val" class="text-[#008765] font-extrabold">₹4,000 / month</span>
+                </div>
+              </div>
+
+              <!-- Auth Action -->
+              <div id="npci-auth-steps" class="space-y-3">
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-[11px] text-slate-600 flex items-center space-x-2">
+                  <i data-lucide="shield" class="w-4 h-4 text-[#008765] shrink-0"></i>
+                  <span>Simulate instant verification via NetBanking / Aadhaar OTP</span>
+                </div>
+
+                <button id="btn-simulate-auth" class="w-full py-3 bg-[#00D09C] hover:bg-[#00B386] text-slate-950 font-bold text-xs rounded-xl flex items-center justify-center space-x-2 transition-colors shadow-xs">
+                  <i data-lucide="key" class="w-4 h-4"></i>
+                  <span>Simulate Instant Bank Approval</span>
+                </button>
+              </div>
+
+              <!-- Spinner -->
+              <div id="npci-spinner" class="hidden py-4 text-center space-y-2">
+                <div class="w-8 h-8 border-3 border-[#00D09C] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <p class="text-xs text-slate-600">Registering UMRN with National Payments Corporation of India (NPCI)...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- iOS Home Indicator Bar -->
+          <div class="home-indicator-bar"></div>
+
+        </div> <!-- End Phone Screen -->
+
+      </div> <!-- End Phone Chassis -->
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- GROWTH PM SPECIFICATIONS OFF-CANVAS DRAWER               -->
+  <!-- ======================================================== -->
+  <div id="pm-backdrop" class="pm-backdrop"></div>
+  
+  <aside id="pm-drawer" class="pm-drawer flex flex-col bg-white text-slate-900">
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="w-3 h-3 rounded-full bg-[#00D09C]"></span>
+        <h3 class="text-base font-bold text-slate-900 tracking-tight">Product Design Specs</h3>
+      </div>
+      <button id="btn-close-pm-drawer" class="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Content -->
+    <div class="flex-1 overflow-y-auto p-5 space-y-5 text-xs text-slate-700 leading-relaxed no-scrollbar">
+      
+      <!-- Growth KPIs -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+          <span class="text-[10px] text-slate-500 block uppercase font-mono">18M Retention Lift</span>
+          <span class="text-lg font-extrabold text-[#008765]">+14.2%</span>
+          <span class="text-[9px] text-slate-500 block">vs unanchored control</span>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+          <span class="text-[10px] text-slate-500 block uppercase font-mono">12M Dip Churn</span>
+          <span class="text-lg font-extrabold text-amber-700">-62.1%</span>
+          <span class="text-[9px] text-slate-500 block">Panic pauses averted</span>
+        </div>
+      </div>
+
+      <!-- PM Tabs -->
+      <div class="flex border-b border-slate-200 font-semibold">
+        <button class="pm-tab-btn active-pm-tab pb-2 px-3 text-[#008765]" data-section="thesis">Design Thesis</button>
+        <button class="pm-tab-btn pb-2 px-3 text-slate-500 hover:text-slate-900" data-section="rag">Cohort Proof</button>
+        <button class="pm-tab-btn pb-2 px-3 text-slate-500 hover:text-slate-900" data-section="ab">A/B Testing</button>
+      </div>
+
+      <!-- Tab 1: Behavioral Thesis -->
+      <div id="pm-pane-thesis" class="pm-tab-pane space-y-3">
+        <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200 space-y-2">
+          <h4 class="font-bold text-slate-900 text-xs">1. Eliminating Optimism Bias</h4>
+          <p class="text-slate-600">
+            Investors extrapolate recent returns. When a mid-cycle correction (-8% to -15%) hits at month 12, they interpret normal cyclicality as capital loss.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200 space-y-2">
+          <h4 class="font-bold text-slate-900 text-xs">2. Horizontal 1-Tap Cards</h4>
+          <p class="text-slate-600">
+            Compact horizontal goal cards allow users to anchor their mental accounting in one tap without cognitive friction or vertical clutter.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200 space-y-2">
+          <h4 class="font-bold text-slate-900 text-xs">3. Instant Liquid Buffer (Details View)</h4>
+          <p class="text-slate-600">
+            Shown in the details view, the 20% liquid fund cushion provides emergency IMPS liquidity in < 30 mins, safeguarding compounding equity units.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tab 2: Cohort Proof -->
+      <div id="pm-pane-rag" class="pm-tab-pane hidden space-y-3">
+        <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200 space-y-2">
+          <h4 class="font-bold text-slate-900 text-xs">Historical Cohort Insights</h4>
+          <p class="text-slate-600">
+            Real Groww investor historical cohorts demonstrate that 94.2% of investors who did not cancel through the 12-month dip exited with high profitability.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tab 3: A/B Testing -->
+      <div id="pm-pane-ab" class="pm-tab-pane hidden space-y-3">
+        <div class="grid grid-cols-2 gap-2 text-[11px]">
+          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+            <span class="text-slate-600 block font-semibold">Variant A (Control)</span>
+            <p class="text-slate-500 mt-1">Direct to e-NACH with generic amount.</p>
+            <div class="text-red-600 font-bold mt-2">12M Churn: 29.2%</div>
+          </div>
+          <div class="p-3 bg-emerald-50 rounded-lg border border-emerald-300">
+            <span class="text-[#008765] block font-semibold">Variant B (Goal SIP)</span>
+            <p class="text-slate-600 mt-1">Horizontal goal cards + investor proof + calibrated details.</p>
+            <div class="text-[#008765] font-bold mt-2">12M Churn: 11.0%</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- Modular Application Bootstrapper -->
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

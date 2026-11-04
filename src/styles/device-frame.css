@@ -1,0 +1,240 @@
+/* Hyper-Realistic Mobile Device Frame Styling */
+
+/* Mobile Chassis Wrapper */
+.device-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ========================================= */
+/* IPHONE 16 PRO CHASSIS                     */
+/* ========================================= */
+.device-chassis.iphone {
+  position: relative;
+  width: 412px;
+  height: 852px;
+  background: #1c1d21;
+  border-radius: 54px;
+  padding: 11px;
+  /* Titanium frame shadow and multi-layer metallic bevels */
+  box-shadow: 
+    0 0 0 1px #33363e,
+    0 0 0 3px #18191c,
+    0 0 0 4.5px #484b55,
+    inset 0 0 3px 2px rgba(255, 255, 255, 0.15),
+    0 30px 80px -15px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(0, 208, 156, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Physical Hardware Buttons on iPhone Chassis */
+/* Left: Action Button */
+.device-chassis.iphone::before {
+  content: '';
+  position: absolute;
+  left: -7.5px;
+  top: 115px;
+  width: 4px;
+  height: 28px;
+  background: #2b2e36;
+  border-radius: 3px 0 0 3px;
+  box-shadow: -1px 0 2px rgba(0,0,0,0.4);
+}
+
+/* Left: Volume Up & Down Buttons */
+.device-chassis.iphone .hardware-volume {
+  position: absolute;
+  left: -7.5px;
+  top: 165px;
+  width: 4px;
+  height: 105px;
+  pointer-events: none;
+}
+.device-chassis.iphone .hardware-volume-up {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 48px;
+  background: #2b2e36;
+  border-radius: 3px 0 0 3px;
+}
+.device-chassis.iphone .hardware-volume-down {
+  position: absolute;
+  top: 58px;
+  left: 0;
+  width: 4px;
+  height: 48px;
+  background: #2b2e36;
+  border-radius: 3px 0 0 3px;
+}
+
+/* Right: Power / Side Key */
+.device-chassis.iphone::after {
+  content: '';
+  position: absolute;
+  right: -7.5px;
+  top: 175px;
+  width: 4px;
+  height: 72px;
+  background: #2b2e36;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 1px 0 2px rgba(0,0,0,0.4);
+}
+
+/* ========================================= */
+/* GOOGLE PIXEL 9 CHASSIS                    */
+/* ========================================= */
+.device-chassis.pixel {
+  position: relative;
+  width: 412px;
+  height: 852px;
+  background: #14161a;
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow: 
+    0 0 0 2px #262930,
+    0 0 0 4px #0e1013,
+    0 25px 70px -10px rgba(0, 0, 0, 0.85);
+  transition: all 0.3s ease;
+}
+.device-chassis.pixel::before {
+  display: none;
+}
+.device-chassis.pixel::after {
+  content: '';
+  position: absolute;
+  right: -6.5px;
+  top: 150px;
+  width: 4px;
+  height: 40px;
+  background: #3a3f4d;
+  border-radius: 0 3px 3px 0;
+}
+
+/* ========================================= */
+/* FRAMELESS / MOBILE NATIVE VIEW           */
+/* ========================================= */
+.device-chassis.frameless {
+  width: 390px;
+  height: 844px;
+  padding: 0;
+  background: transparent;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  border-radius: 28px;
+}
+.device-chassis.frameless::before,
+.device-chassis.frameless::after,
+.device-chassis.frameless .hardware-volume {
+  display: none;
+}
+.device-chassis.frameless .inner-screen {
+  border-radius: 28px !important;
+}
+
+/* ========================================= */
+/* INNER SCREEN SURFACE                      */
+/* ========================================= */
+.inner-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 44px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Dynamic Island (iPhone) */
+.dynamic-island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 118px;
+  height: 28px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.dynamic-island:hover {
+  width: 132px;
+}
+.camera-lens {
+  width: 9px;
+  height: 9px;
+  background: #111422;
+  border-radius: 50%;
+  box-shadow: inset 0 0 2px 1px #1f2742;
+  border: 1px solid #1a2030;
+}
+.sensor-pill {
+  width: 7px;
+  height: 7px;
+  background: #0a0b10;
+  border-radius: 50%;
+}
+
+/* Pixel Camera Punchole */
+.pixel-punchhole {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border-radius: 50%;
+  z-index: 50;
+  border: 1.5px solid #1f232d;
+  display: none;
+}
+.device-chassis.pixel .pixel-punchhole {
+  display: block;
+}
+.device-chassis.pixel .dynamic-island {
+  display: none;
+}
+
+/* iOS Home Indicator Bar */
+.home-indicator-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 135px;
+  height: 4.5px;
+  border-radius: 9999px;
+  background: rgba(30, 34, 43, 0.4);
+  z-index: 50;
+  pointer-events: none;
+  transition: background-color 0.2s ease;
+}
+.theme-dark .home-indicator-bar {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Glossy screen glass reflection */
+.screen-glare {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0) 65%);
+  pointer-events: none;
+  z-index: 45;
+  border-top-right-radius: 44px;
+}
+

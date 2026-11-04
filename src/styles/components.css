@@ -1,0 +1,191 @@
+/* Components Specific Styles & Micro-Animations */
+
+/* Bottom Sheet Physics */
+.bottom-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 94%;
+  background-color: var(--bg-surface);
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  transform: translateY(105%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sheet);
+  z-index: 60;
+  will-change: transform;
+}
+.bottom-sheet.open {
+  transform: translateY(0%);
+}
+
+.bottom-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 55;
+}
+.bottom-sheet-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Horizontal Goal Cards */
+.goal-card {
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-card);
+  border-radius: 18px;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  position: relative;
+}
+.goal-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 208, 156, 0.6);
+  background-color: var(--bg-card-subtle);
+}
+.goal-card:active {
+  transform: scale(0.98);
+}
+.goal-card.active {
+  border-color: #00D09C !important;
+  background: #F0FDF8 !important;
+  box-shadow: 0 4px 16px -2px rgba(0, 208, 156, 0.2);
+}
+.theme-dark .goal-card.active {
+  background: rgba(0, 208, 156, 0.12) !important;
+}
+
+/* Custom Styled Range Slider */
+input[type=range].groww-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: #E5E7EB;
+  outline: none;
+}
+.theme-dark input[type=range].groww-slider {
+  background: #242B3D;
+}
+input[type=range].groww-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00D09C;
+  border: 3px solid #FFFFFF;
+  cursor: grab;
+  box-shadow: 0 2px 8px rgba(0, 208, 156, 0.45);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.theme-dark input[type=range].groww-slider::-webkit-slider-thumb {
+  border-color: #121623;
+}
+input[type=range].groww-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.15);
+  box-shadow: 0 3px 14px rgba(0, 208, 156, 0.75);
+}
+input[type=range].groww-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00D09C;
+  border: 3px solid #FFFFFF;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 208, 156, 0.45);
+}
+
+/* Groww Primary Action Button */
+.groww-primary-btn {
+  background: #00D09C;
+  color: #0B1914;
+  box-shadow: 0 6px 20px -2px rgba(0, 208, 156, 0.4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.groww-primary-btn:hover {
+  background: #00B386;
+  box-shadow: 0 8px 24px -2px rgba(0, 208, 156, 0.55);
+  transform: translateY(-1px);
+}
+.groww-primary-btn:active {
+  transform: scale(0.985);
+}
+
+/* Screen View Transition */
+.screen-panel {
+  display: none !important;
+}
+.screen-panel.active {
+  display: block !important;
+  animation: slideFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.screen-panel.active.flex-panel {
+  display: flex !important;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* PM Drawer Off-Canvas */
+.pm-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 580px;
+  background: #FFFFFF;
+  border-left: 1px solid #E5E7EB;
+  color: #1E222B;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.15);
+}
+.theme-dark .pm-drawer {
+  background: #101420;
+  border-left-color: #232A3D;
+  color: #F1F5F9;
+}
+.pm-drawer.open {
+  transform: translateX(0%);
+}
+
+.pm-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 95;
+}
+.pm-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
