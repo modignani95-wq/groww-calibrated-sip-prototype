@@ -1,6 +1,6 @@
 {
   "name": "groww-calibrated-sip-prototype",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "Groww Calibrated SIP Onboarding Funnel Prototype - Growth PM Edition (#EP-014)",
   "main": "src/main.js",
   "type": "module",
